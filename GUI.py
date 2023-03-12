@@ -6,6 +6,7 @@ from routine import BOT, MANUAL
 from threading import Thread
 from Question import auto_learning
 from lib_platforms import open_file
+from selenium.webdriver.common.by import By
 
 class GUI:
     def __init__(self,driver):
@@ -355,22 +356,22 @@ class GUI:
             
             self.number_q += 1
             if self.module.test_blanc == False:
-                if self.driver.find_elements_by_xpath("//span[@title='Mauvaise réponse']") != [] and return_tag != ["auto_fail"]:
+                if self.driver.find_elements(By.XPATH,"//span[@title='Mauvaise réponse']") != [] and return_tag != ["auto_fail"]:
                     text = ''
-                    answer_word_els = self.driver.find_elements_by_xpath("//span[@class = 'answerWord']/span[@class = 'pointAndClickSpan']")                 
+                    answer_word_els = self.driver.find_elements(By.XPATH,"//span[@class = 'answerWord']/span[@class = 'pointAndClickSpan']")                 
                     if len(answer_word_els) >= 1:
                         text = answer_word_els[1].text
                     else:
                         text = answer_word_els[0].text or ""
 
                     if return_tag == []:
-                        auto_learning().add_match( self.driver.find_element_by_class_name("sentence").text, text)
+                        auto_learning().add_match( self.driver.find_element(By.CLASS_NAME,"sentence").text, text)
                     else:
                         auto_learning().add_data( return_tag, text)
                     self.log.insert("end","erreur détéctée apprentissage...\n","green")
                 
                 try:
-                    self.driver.find_element_by_class_name("nextButton").click()
+                    self.driver.find_element(By.CLASS_NAME,"nextButton").click()
                 except Exception:
                     pass
 

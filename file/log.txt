@@ -1,2 +1,2 @@
-login:None
-mdp:None
+login:dias@et.intechinfo.fr
+mdp:DIAS Lucas S01 2022S

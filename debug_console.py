@@ -6,6 +6,7 @@ from routine import BOT
 from init import pop_up
 from GUI import GUI
 from lib_platforms import open_file
+from selenium.webdriver.common.by import By
 
 module_load = None
 driver_ = None
@@ -90,9 +91,9 @@ class cmd:
             logIn = log[log.index("login:") : log.index("mdp:")].replace("login:","")
             mdp = log[log.index("mdp:") : len(log)].replace("mdp:","")
             flog.close()
-            driver_.find_element_by_id("user_pseudonym").send_keys(logIn)
-            driver_.find_element_by_id("user_password").send_keys(mdp)
-            driver_.find_element_by_id("login-btn").click()
+            driver_.find_element(By.ID,"user_pseudonym").send_keys(logIn)
+            driver_.find_element(By.ID,"user_password").send_keys(mdp)
+            driver_.find_element(By.ID,"login-btn").click()
     
     class open_file:
         def help(self):
@@ -138,7 +139,7 @@ class cmd:
             if driver_ == None:
                 print("VoltaireTaMere_debug>no driver load")
             else:
-                print(driver_.find_element_by_class_name("sentence").text)
+                print(driver_.find_element(By.CLASS_NAME,"sentence").text)
         def data(self):
             if module_load == None:
                 print("VoltaireTaMere_debug>no module load")

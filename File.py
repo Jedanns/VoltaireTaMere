@@ -1,5 +1,5 @@
 from termcolor import colored
-
+from selenium.webdriver.common.by import By
 def print_debug(string, color):
     print(colored(string,color))
     f = open("./file/DEBUG.txt","a",encoding="utf-8")
@@ -36,14 +36,14 @@ def connect(driver):
     logIn= found_data("./file/log.txt", "login","str")
     mdp = found_data("./file/log.txt", "mdp","str")
     try:
-        driver.find_element_by_id("btn_home_sortir").click()
+        driver.find_element(By.ID,"btn_home_sortir").click()
     except:
         None
     driver.get("https://www.projet-voltaire.fr/voltaire/com.woonoz.gwt.woonoz.Voltaire/Voltaire.html?returnUrl=www.projet-voltaire.fr/choix-parcours/&applicationCode=pv")
     if found_data("./file/options.txt", "auto_login", "int"):
-        driver.find_element_by_id("user_pseudonym").send_keys(logIn)
-        driver.find_element_by_id("user_password").send_keys(mdp)
-        driver.find_element_by_id("login-btn").click()
+        driver.find_element(By.ID,"user_pseudonym").send_keys(logIn)
+        driver.find_element(By.ID,"user_password").send_keys(mdp)
+        driver.find_element(By.ID,"login-btn").click()
     
 class Module:
     def __init__(self,path):

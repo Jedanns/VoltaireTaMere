@@ -3,7 +3,7 @@ import webbrowser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as chrome_options
 from selenium.webdriver.firefox.options import Options as firefox_options
-from selenium.webdriver.opera.options import Options as opera_options
+# from selenium.webdriver.opera.options import Options as opera_options
 from selenium.webdriver.edge.options import Options as edge_options
 from File import print_debug, found_data
 #/msg(-size:str -txt:str -title:str -link:str -lock:bool -version:str -show:bool)
@@ -62,22 +62,22 @@ def init():
         v_driver = webdriver.Chrome(options=option)
     except:
         print_debug("[v_driver] don't detect Chrome","yellow")
-        try:
-            option = firefox_options()
-            option.add_argument ("--headless")
-            v_driver = webdriver.Opera(options=option)
-        except:
-            print_debug("[v_driver] don't detect Opera","yellow")
-            try:
-                option = opera_options()
-                option.add_argument ("--headless")
-                v_driver = webdriver.Firefox(options=option)
-            except:
-                print_debug("[v_driver] CANT FIND COMPATIBLE DRIVER -> EXIT","red")
-                e = pop_up("/msg{-txt:aucun moteur\n de recherche detecté \n(chrome, opera ou firefox) -title:VoltaireTaMere -link:https://www.google.com/intl/fr_fr/chrome/ -lock:0 -size:180x90}")
-                e.start_root()
-                e.root.mainloop()
-                exit()
+        # try:
+        #     option = firefox_options()
+        #     option.add_argument ("--headless")
+        #     v_driver = webdriver.Opera(options=option)
+        # except:
+        #     print_debug("[v_driver] don't detect Opera","yellow")
+        #     try:
+        #         option = opera_options()
+        #         option.add_argument ("--headless")
+        #         v_driver = webdriver.Firefox(options=option)
+        #     except:
+        #         print_debug("[v_driver] CANT FIND COMPATIBLE DRIVER -> EXIT","red")
+        #         e = pop_up("/msg{-txt:aucun moteur\n de recherche detecté \n(chrome, opera ou firefox) -title:VoltaireTaMere -link:https://www.google.com/intl/fr_fr/chrome/ -lock:0 -size:180x90}")
+        #         e.start_root()
+        #         e.root.mainloop()
+        exit()
     return
     v_driver.get("https://sites.google.com/view/voltairetamere/init")
     v_driver.implicitly_wait(1)

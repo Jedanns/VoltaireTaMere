@@ -1,6 +1,7 @@
 from GUI import GUI, Login
 from File import print_debug, found_data, connect
 from init import init, pop_up
+from selenium.webdriver.common.by import By
 from selenium import webdriver
 from os import path
 import subprocess

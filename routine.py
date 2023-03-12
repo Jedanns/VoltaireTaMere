@@ -5,7 +5,7 @@ from random import randint
 
 def test_Feature(Feature, driver): #test la presence d'une feature
     try:
-        driver.find_element_by_class_name(Feature)
+        driver.find_element(By.CLASS_NAME,Feature)
         return True
     except:
         return False
@@ -17,7 +17,7 @@ def BOT(driver, data, test_blanc, accr):
         audio = test_Feature("sentenceAudioReader", driver)
         if test_Feature("popupContent", driver):
             try:
-                driver.find_element_by_id("btn_fermer").click()
+                driver.find_element(By.ID,"btn_fermer").click()
             except:
                 print_debug("[BOT] FAILED TO EXECUTE FEATURE IN","red")
                 return "feature_in"
@@ -25,7 +25,7 @@ def BOT(driver, data, test_blanc, accr):
         audio = False
         
     try:
-        Phrase = driver.find_element_by_class_name("sentence").text
+        Phrase = driver.find_element(By.CLASS_NAME,"sentence").text
     except:
         return "no_sentence"
         
@@ -35,24 +35,24 @@ def BOT(driver, data, test_blanc, accr):
     if randint(1,100) > accr and not(audio):
         if question.matche != "":
             if not(test_blanc):
-                driver.find_element_by_id("btn_pas_de_faute").click()
+                driver.find_element(By.ID,"btn_pas_de_faute").click()
         else:
-            driver.find_elements_by_xpath("//span[@class = 'pointAndClickSpan'][.='"+ split_Word(question.phrase)[0] +"']")[0].click()
+            driver.find_elements(By.XPATH,"//span[@class = 'pointAndClickSpan'][.='"+ split_Word(question.phrase)[0] +"']")[0].click()
         return ["auto_fail"]
         
 
     if question.matche != "":
         if audio:
-            driver.find_element_by_xpath("//input[@class='gwt-TextBox writingExerciseSpan']").send_keys(question.corr_in_matche.replace("@",""))
-            driver.find_element_by_id("btn_pas_de_faute").click()
+            driver.find_element(By.XPATH,"//input[@class='gwt-TextBox writingExerciseSpan']").send_keys(question.corr_in_matche.replace("@",""))
+            driver.find_element(By.ID,"btn_pas_de_faute").click()
             print_debug("[BOT] EXECUTION AUDIO DONE","green")
         else:
             try:
-                driver.find_elements_by_xpath("//span[@class = 'pointAndClickSpan'][.='"+ question.err_in_phrase +"']")[ found_good_one(question.phrase, question.matche, question.err_in_phrase) ].click()
+                driver.find_elements(By.XPATH,"//span[@class = 'pointAndClickSpan'][.='"+ question.err_in_phrase +"']")[ found_good_one(question.phrase, question.matche, question.err_in_phrase) ].click()
                 print_debug("[BOT] EXECUTION CLICK DONE","green")
             except:
                 if "…" in question.err_in_phrase:
-                    driver.find_elements_by_xpath("//span[@class = 'pointAndClickSpan'][.='"+ question.err_in_phrase.replace("…","") +"']")[ found_good_one(question.phrase, question.matche, question.err_in_phrase.replace("…","")) ].click()
+                    driver.find_elements(By.XPATH,"//span[@class = 'pointAndClickSpan'][.='"+ question.err_in_phrase.replace("…","") +"']")[ found_good_one(question.phrase, question.matche, question.err_in_phrase.replace("…","")) ].click()
                 else:
                     print_debug("[BOT] FAILED TO EXECUTE CAN'T TOUCH: "+str(question.err_in_phrase),"red")
                     return "can't_touche &"+str(question.err_in_phrase)
@@ -62,7 +62,7 @@ def BOT(driver, data, test_blanc, accr):
             return "not_found"
         else:
             try:
-                driver.find_element_by_class_name("noMistakeButton").click()
+                driver.find_element(By.CLASS_NAME,"noMistakeButton").click()
                 print_debug("[BOT] EXECUTION NO MISTAKE DONE","green")
             except:
                 return []
@@ -75,7 +75,7 @@ def MANUAL(driver, data, test_blanc):
         audio = test_Feature("sentenceAudioReader", driver)
         if test_Feature("popupContent", driver):
             try:
-                driver.find_element_by_id("btn_fermer").click()
+                driver.find_element(By.ID,"btn_fermer").click()
             except:
                 print_debug("[BOT] FAILED TO EXECUTE FEATURE IN","red")
                 return "feature_in"
@@ -83,7 +83,7 @@ def MANUAL(driver, data, test_blanc):
         audio = False
     
     try:
-        Phrase = driver.find_element_by_class_name("sentence").text
+        Phrase = driver.find_element(By.CLASS_NAME,"sentence").text
     except:
         return "no_sentence"
     
